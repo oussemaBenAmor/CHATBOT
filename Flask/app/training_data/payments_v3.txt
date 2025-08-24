@@ -1,0 +1,35 @@
+Payments Policy - Version 3
+
+1. Purpose
+This document outlines the policy for payments handled by our organization.
+
+2. Policy Summary
+We aim to ensure all payments are processed efficiently. Contact support@company.com for issues or clarifications.
+
+3. Payment Processing
+Payments via debit card are processed within 24 hours.
+Debit card transactions are processed quickly for efficiency.
+
+4. Payment Processing
+International bank transfers take 5 business days to complete.
+Additional time is needed for international banking protocols.
+
+5. Payment Methods
+Payments by cash are accepted for in-store purchases only.
+Cash payments are limited to physical store transactions.
+
+6. Payment Rules
+Refunds for payments are issued to the original account within 7 days.
+Original account refunds ensure traceability and security.
+Payment issues must be reported within 3 business days.
+Prompt reporting helps resolve issues swiftly.
+
+7. Summary
+- Payments: Payments via debit card are processed within 24 hours. (Debit card transactions are processed quickly for efficiency.)
+- Payments: International bank transfers take 5 business days to complete. (Additional time is needed for international banking protocols.)
+- Payments: Payments by cash are accepted for in-store purchases only. (Cash payments are limited to physical store transactions.)
+- Payments: Refunds for payments are issued to the original account within 7 days. (Original account refunds ensure traceability and security.)
+- Payments: Payment issues must be reported within 3 business days. (Prompt reporting helps resolve issues swiftly.)
+
+8. Contact
+For queries, email support@company.com or call 0800-123-456 during business hours (9 AM - 5 PM, Monday to Friday).
