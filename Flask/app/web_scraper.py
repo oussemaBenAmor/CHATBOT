@@ -321,33 +321,64 @@ class WebScraper:
             relevant_sentences = [s.strip() for s in sentences if len(s.strip()) > 20][:30]
         return '. '.join(relevant_sentences[:50])
     
+    # def extract_transaction_conditions(self, content: str, transaction_type: str) -> Dict[str, List[str]]:
+    #     """Extract specific transaction conditions and requirements for any transaction type"""
+    #     conditions = {
+    #         'requirements': [], 'timeframes': [], 'fees': [], 'restrictions': [], 'procedures': [], 'general_info': []
+    #     }
+    #     sentences = re.split(r'[.!?]+', content)
+    #     for sentence in sentences:
+    #         sentence = sentence.strip()
+    #         if len(sentence) < 15:
+    #             continue
+    #         sentence_lower = sentence.lower()
+    #         if any(word in sentence_lower for word in ['require', 'need', 'must', 'should', 'have to', 'eligible', 'condition', 'qualify', 'prerequisite']):
+    #             conditions['requirements'].append(sentence)
+    #         elif any(word in sentence_lower for word in ['fee', 'cost', 'charge', 'price', '$', 'percent', '%', '€', 'euro', 'dollar', 'pound', 'yen', 'amount', 'rate']):
+    #             conditions['fees'].append(sentence)
+    #         elif any(word in sentence_lower for word in ['day', 'week', 'month', 'hour', 'time', 'deadline', 'period', 'duration', 'limit', 'expiry', 'valid']):
+    #             conditions['timeframes'].append(sentence)
+    #         elif any(word in sentence_lower for word in ['cannot', 'not allowed', 'prohibited', 'restricted', 'limit', 'not eligible', 'exclusive', 'forbidden', 'banned', 'excluded']):
+    #             conditions['restrictions'].append(sentence)
+    #         elif any(word in sentence_lower for word in ['step', 'process', 'procedure', 'how to', 'follow', 'complete', 'submit', 'fill', 'form', 'application', 'request']):
+    #             conditions['procedures'].append(sentence)
+    #         elif any(word in sentence_lower for word in ['policy', 'terms', 'conditions', 'rules', 'guidelines', 'information', 'details', 'note', 'important', 'attention']):
+    #             conditions['general_info'].append(sentence)
+    #         elif re.search(r'\d+', sentence) and len(sentence) > 20:
+    #             conditions['general_info'].append(sentence)
+    #         elif any(term in sentence_lower for term in ['€', 'euro', 'dollar', '$', 'pound', '£', '¥', 'yen']):
+    #             conditions['fees'].append(sentence)
+    #     for category in conditions:
+    #         conditions[category] = conditions[category][:8]
+    #     return conditions
     def extract_transaction_conditions(self, content: str, transaction_type: str) -> Dict[str, List[str]]:
-        """Extract specific transaction conditions and requirements for any transaction type"""
-        conditions = {
-            'requirements': [], 'timeframes': [], 'fees': [], 'restrictions': [], 'procedures': [], 'general_info': []
+        """
+        Extract transaction conditions and requirements for any transaction type, organized by category.
+        """
+        categories = {
+        'requirements': ['require', 'need', 'must', 'should', 'have to', 'eligible', 'condition', 'qualify', 'prerequisite'],
+        'fees': ['fee', 'cost', 'charge', 'price', '$', 'percent', '%', '€', 'euro', 'dollar', 'pound', 'yen', 'amount', 'rate'],
+        'timeframes': ['day', 'week', 'month', 'hour', 'time', 'deadline', 'period', 'duration', 'limit', 'expiry', 'valid', 'year'],
+        'restrictions': ['cannot', 'not allowed', 'prohibited', 'restricted', 'limit', 'not eligible', 'exclusive', 'forbidden', 'banned', 'excluded'],
+        'procedures': ['step', 'process', 'procedure', 'how to', 'follow', 'complete', 'submit', 'fill', 'form', 'application', 'request', 'file', 'check'],
+        'general_info': ['policy', 'terms', 'conditions', 'rules', 'guidelines', 'information', 'details', 'note', 'important', 'attention']
         }
+        conditions = {cat: [] for cat in categories}
         sentences = re.split(r'[.!?]+', content)
         for sentence in sentences:
             sentence = sentence.strip()
             if len(sentence) < 15:
                 continue
             sentence_lower = sentence.lower()
-            if any(word in sentence_lower for word in ['require', 'need', 'must', 'should', 'have to', 'eligible', 'condition', 'qualify', 'prerequisite']):
-                conditions['requirements'].append(sentence)
-            elif any(word in sentence_lower for word in ['fee', 'cost', 'charge', 'price', '$', 'percent', '%', '€', 'euro', 'dollar', 'pound', 'yen', 'amount', 'rate']):
-                conditions['fees'].append(sentence)
-            elif any(word in sentence_lower for word in ['day', 'week', 'month', 'hour', 'time', 'deadline', 'period', 'duration', 'limit', 'expiry', 'valid']):
-                conditions['timeframes'].append(sentence)
-            elif any(word in sentence_lower for word in ['cannot', 'not allowed', 'prohibited', 'restricted', 'limit', 'not eligible', 'exclusive', 'forbidden', 'banned', 'excluded']):
-                conditions['restrictions'].append(sentence)
-            elif any(word in sentence_lower for word in ['step', 'process', 'procedure', 'how to', 'follow', 'complete', 'submit', 'fill', 'form', 'application', 'request']):
-                conditions['procedures'].append(sentence)
-            elif any(word in sentence_lower for word in ['policy', 'terms', 'conditions', 'rules', 'guidelines', 'information', 'details', 'note', 'important', 'attention']):
+            found = False
+            for cat, keywords in categories.items():
+                if any(word in sentence_lower for word in keywords):
+                    conditions[cat].append(sentence)
+                    found = True
+                    break
+            if not found and len(sentence) > 20:
                 conditions['general_info'].append(sentence)
-            elif re.search(r'\d+', sentence) and len(sentence) > 20:
-                conditions['general_info'].append(sentence)
-            elif any(term in sentence_lower for term in ['€', 'euro', 'dollar', '$', 'pound', '£', '¥', 'yen']):
-                conditions['fees'].append(sentence)
+    # Limit each category to 8 items
         for category in conditions:
             conditions[category] = conditions[category][:8]
         return conditions

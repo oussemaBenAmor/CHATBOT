@@ -14,7 +14,7 @@ TRANSACTION_TYPES = {
     "refunds": {
         "section_titles": ["Refund Eligibility", "Return Requirements", "Refund Procedures"],
         "versions": [
-            # Version 1
+            # ...existing versions...
             [
                 ("Refunds are issued within 14 days for defective products.", 
                  "Only products verified as defective by our team qualify for refunds within this period."),
@@ -27,7 +27,6 @@ TRANSACTION_TYPES = {
                 ("Refunds are not available for change of mind on non-defective items.", 
                  "This applies to items that are fully functional and undamaged.")
             ],
-            # Version 2
             [
                 ("Refunds are available within 10 days for faulty items.", 
                  "Faulty items must be reported and returned within this timeframe."),
@@ -40,7 +39,6 @@ TRANSACTION_TYPES = {
                 ("No refunds for international orders unless defective.", 
                  "International orders are subject to stricter refund policies.")
             ],
-            # Version 3
             [
                 ("Refunds are processed within 7 days for eligible products.", 
                  "Eligibility is determined by product condition and purchase date."),
@@ -53,7 +51,6 @@ TRANSACTION_TYPES = {
                 ("No refunds for promotional items or special orders.", 
                  "Promotional items are final sale due to discounted pricing.")
             ],
-            # Version 4
             [
                 ("All refunds require a valid receipt or order number.", 
                  "This ensures eligibility for all refund processing."),  # Common condition
@@ -66,7 +63,6 @@ TRANSACTION_TYPES = {
                 ("No refunds are issued for items lost in transit.", 
                  "Lost items are covered under shipping insurance instead.")
             ],
-            # Version 5
             [
                 ("All refunds require a valid receipt or order number.", 
                  "This ensures eligibility for all refund processing."),  # Common condition
@@ -79,7 +75,6 @@ TRANSACTION_TYPES = {
                 ("Refunds are paused during system maintenance periods.", 
                  "Maintenance schedules are posted on our website.")
             ],
-            # Version 6
             [
                 ("All refunds require a valid receipt or order number.", 
                  "This ensures eligibility for all refund processing."),  # Common condition
@@ -92,7 +87,6 @@ TRANSACTION_TYPES = {
                 ("Refunds are denied if packaging is missing labels.", 
                  "Labels are required for return identification.")
             ],
-            # Version 7
             [
                 ("All refunds require a valid receipt or order number.", 
                  "This ensures eligibility for all refund processing."),  # Common condition
@@ -105,7 +99,6 @@ TRANSACTION_TYPES = {
                 ("No refunds are available during product launches.", 
                  "Launches prioritize new product distribution.")
             ],
-            # Version 8
             [
                 ("All refunds require a valid receipt or order number.", 
                  "This ensures eligibility for all refund processing."),  # Common condition
@@ -118,7 +111,6 @@ TRANSACTION_TYPES = {
                 ("Refunds are tracked via a unique refund ID.", 
                  "ID allows customers to monitor refund status online.")
             ],
-            # Version 9
             [
                 ("All refunds require a valid receipt or order number.", 
                  "This ensures eligibility for all refund processing."),  # Common condition
@@ -130,13 +122,40 @@ TRANSACTION_TYPES = {
                  "Proration reflects the unused subscription period."),
                 ("Refunds are processed offline during network failures.", 
                  "Offline processing ensures continuity during outages.")
+            ],
+            # --- New version with cross-transaction relationships ---
+            [
+                # Refunds related to payments
+                ("Payments made by credit card are refundable if the item is unused and in saleable condition.",
+                 "Refunds for credit card payments are processed within 5 business days to the original card."),
+                ("Payments made by bank transfer are refundable to the original bank account within 7 business days.",
+                 "A valid bank account must be provided for refund processing."),
+                ("Refunds are not available for payments made in cash for international orders.",
+                 "International cash payments are final and non-refundable."),
+                # Refunds related to transfers
+                ("Failed transfers are automatically refunded within 48 hours.",
+                 "Refunds for failed transfers are processed to the original payment method."),
+                # Refunds related to exchanges
+                ("If an exchange cannot be fulfilled due to out-of-stock items, a refund will be issued.",
+                 "Refunds for unfulfilled exchanges follow the standard refund process."),
+                # General
+                ("Refund requests for payments made during promotional events are subject to special conditions.",
+                 "Promotional event refunds may be limited or delayed."),
+                ("Refunds for items received via exchange are only available if the exchanged item is defective.",
+                 "Refunds are not issued for change of mind after an exchange."),
+                ("Refunds for payments made by cryptocurrency are processed at the current exchange rate.",
+                 "Cryptocurrency refunds may be subject to conversion fees."),
+                ("Refunds for bulk payments require manager approval and may be prorated.",
+                 "Approval ensures compliance with bulk purchase terms."),
+                ("Refunds for transfers between linked accounts are processed within 24 hours.",
+                 "Linked account refunds are expedited for customer convenience.")
             ]
         ]
     },
     "payments": {
         "section_titles": ["Payment Processing", "Payment Methods", "Payment Rules"],
         "versions": [
-            # Version 1
+            # ...existing versions...
             [
                 ("Payments by credit card are processed immediately.", 
                  "Credit card transactions are verified and completed instantly."),
@@ -149,7 +168,6 @@ TRANSACTION_TYPES = {
                 ("All payment disputes must be reported within 7 days.", 
                  "Timely reporting ensures quick resolution of payment issues.")
             ],
-            # Version 2
             [
                 ("Credit card payments are verified instantly.", 
                  "Verification ensures secure and immediate processing."),
@@ -162,7 +180,6 @@ TRANSACTION_TYPES = {
                 ("Disputes for payments must be filed within 10 days.", 
                  "Extended reporting period allows flexibility for dispute resolution.")
             ],
-            # Version 3
             [
                 ("Payments via debit card are processed within 24 hours.", 
                  "Debit card transactions are processed quickly for efficiency."),
@@ -175,7 +192,6 @@ TRANSACTION_TYPES = {
                 ("Payment issues must be reported within 3 business days.", 
                  "Prompt reporting helps resolve issues swiftly.")
             ],
-            # Version 4
             [
                 ("All payments must include a transaction reference number.", 
                  "This ensures accurate tracking of each payment."),  # Common condition
@@ -188,7 +204,6 @@ TRANSACTION_TYPES = {
                 ("Payment failures trigger an automatic retry after 24 hours.", 
                  "Retries ensure payment completion without manual intervention.")
             ],
-            # Version 5
             [
                 ("All payments must include a transaction reference number.", 
                  "This ensures accurate tracking of each payment."),  # Common condition
@@ -201,7 +216,6 @@ TRANSACTION_TYPES = {
                 ("Payment disputes can be escalated to a supervisor.", 
                  "Escalation provides a higher level of review.")
             ],
-            # Version 6
             [
                 ("All payments must include a transaction reference number.", 
                  "This ensures accurate tracking of each payment."),  # Common condition
@@ -214,7 +228,6 @@ TRANSACTION_TYPES = {
                 ("Payment processing stops during server outages.", 
                  "Outages are announced via email notifications.")
             ],
-            # Version 7
             [
                 ("All payments must include a transaction reference number.", 
                  "This ensures accurate tracking of each payment."),  # Common condition
@@ -227,7 +240,6 @@ TRANSACTION_TYPES = {
                 ("Payment confirmations are sent via SMS.", 
                  "SMS ensures immediate customer notification.")
             ],
-            # Version 8
             [
                 ("All payments must include a transaction reference number.", 
                  "This ensures accurate tracking of each payment."),  # Common condition
@@ -240,7 +252,6 @@ TRANSACTION_TYPES = {
                 ("Payments are paused during security audits.", 
                  "Audits enhance system integrity.")
             ],
-            # Version 9
             [
                 ("All payments must include a transaction reference number.", 
                  "This ensures accurate tracking of each payment."),  # Common condition
@@ -252,13 +263,36 @@ TRANSACTION_TYPES = {
                  "Fee covers currency exchange costs."),
                 ("Payment records are archived for 5 years.", 
                  "Archiving complies with regulatory requirements.")
+            ],
+            # --- New version with cross-transaction relationships ---
+            [
+                ("Payments made by credit card are eligible for refunds if the item meets refund conditions.",
+                 "Refunds for credit card payments are processed within 5 business days."),
+                ("Payments made by bank transfer can be refunded to the original account within 7 business days.",
+                 "A valid bank account is required for refund processing."),
+                ("Payments for exchanged items are adjusted based on price differences.",
+                 "If the exchanged item is cheaper, the difference is refunded; if more expensive, additional payment is required."),
+                ("Payments for failed transfers are refunded automatically within 48 hours.",
+                 "Refunds for failed transfers are processed to the original payment method."),
+                ("Payments made during promotional events may have limited refund options.",
+                 "Check the promotional terms for refund eligibility."),
+                ("Payments for bulk orders are refundable only with manager approval.",
+                 "Bulk order refunds may be prorated based on usage."),
+                ("Payments made by cryptocurrency are refundable at the current exchange rate.",
+                 "Conversion fees may apply for cryptocurrency refunds."),
+                ("Payments for international orders are non-refundable if paid in cash.",
+                 "International cash payments are final."),
+                ("Payments for items received via exchange are subject to the exchange policy.",
+                 "Refunds for exchanged items are only available if defective."),
+                ("Payments between linked accounts can be reversed within 24 hours if a refund is requested.",
+                 "Reversals are expedited for linked accounts.")
             ]
         ]
     },
     "transfers": {
         "section_titles": ["Transfer Guidelines", "Transfer Policies", "Transfer Conditions"],
         "versions": [
-            # Version 1
+            # ...existing versions...
             [
                 ("Transfers are processed within 3 business days for domestic accounts.", 
                  "Domestic transfers are prioritized for quick processing."),
@@ -271,7 +305,6 @@ TRANSACTION_TYPES = {
                 ("Transfer disputes must be reported within 5 days.", 
                  "Timely reporting ensures disputes are handled efficiently.")
             ],
-            # Version 2
             [
                 ("Domestic transfers are completed within 2 business days.", 
                  "Faster processing for domestic accounts enhances efficiency."),
@@ -284,7 +317,6 @@ TRANSACTION_TYPES = {
                 ("Disputes for transfers must be reported within 7 days.", 
                  "Extended reporting period allows for thorough dispute resolution.")
             ],
-            # Version 3
             [
                 ("Transfers within the same bank are processed within 24 hours.", 
                  "Same-bank transfers are expedited for customer convenience."),
@@ -297,7 +329,6 @@ TRANSACTION_TYPES = {
                 ("Transfer disputes must be filed within 3 days.", 
                  "Quick reporting ensures rapid dispute resolution.")
             ],
-            # Version 4
             [
                 ("All transfers must include a unique transaction ID.", 
                  "This ensures traceability for all transfer operations."),  # Common condition
@@ -310,7 +341,6 @@ TRANSACTION_TYPES = {
                 ("Transfer limits are reduced during peak seasons.", 
                  "Limits prevent system overload during high demand.")
             ],
-            # Version 5
             [
                 ("All transfers must include a unique transaction ID.", 
                  "This ensures traceability for all transfer operations."),  # Common condition
@@ -323,7 +353,6 @@ TRANSACTION_TYPES = {
                 ("Transfers are paused during banking holidays.", 
                  "Pauses align with official banking schedules.")
             ],
-            # Version 6
             [
                 ("All transfers must include a unique transaction ID.", 
                  "This ensures traceability for all transfer operations."),  # Common condition
@@ -336,7 +365,6 @@ TRANSACTION_TYPES = {
                 ("Transfer history is available for 90 days online.", 
                  "Online access aids in tracking past transactions.")
             ],
-            # Version 7
             [
                 ("All transfers must include a unique transaction ID.", 
                  "This ensures traceability for all transfer operations."),  # Common condition
@@ -349,7 +377,6 @@ TRANSACTION_TYPES = {
                 ("Transfer requests are canceled after 24 hours if unverified.", 
                  "Unverified requests are automatically voided.")
             ],
-            # Version 8
             [
                 ("All transfers must include a unique transaction ID.", 
                  "This ensures traceability for all transfer operations."),  # Common condition
@@ -362,7 +389,6 @@ TRANSACTION_TYPES = {
                 ("Transfer delays are notified via email.", 
                  "Notifications keep customers informed of issues.")
             ],
-            # Version 9
             [
                 ("All transfers must include a unique transaction ID.", 
                  "This ensures traceability for all transfer operations."),  # Common condition
@@ -374,13 +400,36 @@ TRANSACTION_TYPES = {
                  "Conversion rates are applied at the time of transfer."),
                 ("Transfer fees are waived for first-time users.", 
                  "Waiver encourages new customer adoption.")
+            ],
+            # --- New version with cross-transaction relationships ---
+            [
+                ("Transfers that fail due to incorrect recipient details are refunded within 48 hours.",
+                 "Refunds are processed to the original payment method."),
+                ("Transfers made as payment for goods are refundable if the goods are returned and meet refund conditions.",
+                 "Refunds for such transfers follow the standard refund process."),
+                ("Transfers between linked accounts can be reversed within 24 hours upon request.",
+                 "Reversals are expedited for customer convenience."),
+                ("Transfers used for exchanges are adjusted based on the price difference.",
+                 "If the exchanged item is cheaper, the difference is refunded; if more expensive, additional transfer is required."),
+                ("International transfers are non-refundable once processed, except in case of failure.",
+                 "Failed international transfers are refunded automatically."),
+                ("Transfers for bulk orders require manager approval for refunds.",
+                 "Approval ensures compliance with bulk purchase terms."),
+                ("Transfers made by cryptocurrency are refundable at the current exchange rate if the transfer fails.",
+                 "Conversion fees may apply for cryptocurrency refunds."),
+                ("Transfers for promotional items are non-refundable.",
+                 "Promotional item transfers are final."),
+                ("Transfers for items received via exchange are subject to the exchange policy.",
+                 "Refunds for exchanged items are only available if defective."),
+                ("Transfers to unverified accounts are automatically refunded.",
+                 "Unverified account transfers are not permitted.")
             ]
         ]
     },
     "exchanges": {
         "section_titles": ["Exchange Criteria", "Exchange Process", "Exchange Terms"],
         "versions": [
-            # Version 1
+            # ...existing versions...
             [
                 ("Exchanges are allowed within 7 days for defective items.", 
                  "Defective items qualify for exchange within this period."),
@@ -393,7 +442,6 @@ TRANSACTION_TYPES = {
                 ("Additional fees may apply for exchanges due to price differences.", 
                  "Price differences are calculated at the time of exchange.")
             ],
-            # Version 2
             [
                 ("Exchanges are permitted within 10 days for faulty products.", 
                  "Faulty products are eligible for exchange within this timeframe."),
@@ -406,7 +454,6 @@ TRANSACTION_TYPES = {
                 ("Price differences for exchanges may incur a 5% fee.", 
                  "This fee covers administrative costs for price adjustments.")
             ],
-            # Version 3
             [
                 ("Exchanges are available within 5 days for defective goods.", 
                  "Defective goods must be reported promptly for exchange."),
@@ -419,7 +466,6 @@ TRANSACTION_TYPES = {
                 ("Additional costs for exchanges are calculated at checkout.", 
                  "Costs are determined based on the new item’s price.")
             ],
-            # Version 4
             [
                 ("All exchanges require proof of original purchase.", 
                  "This ensures eligibility for all exchange requests."),  # Common condition
@@ -432,7 +478,6 @@ TRANSACTION_TYPES = {
                 ("No exchanges are allowed after store closing time.", 
                  "Closing time marks the end of exchange eligibility.")
             ],
-            # Version 5
             [
                 ("All exchanges require proof of original purchase.", 
                  "This ensures eligibility for all exchange requests."),  # Common condition
@@ -445,7 +490,6 @@ TRANSACTION_TYPES = {
                 ("Exchanges are delayed during inventory audits.", 
                  "Audits ensure accurate stock levels.")
             ],
-            # Version 6
             [
                 ("All exchanges require proof of original purchase.", 
                  "This ensures eligibility for all exchange requests."),  # Common condition
@@ -458,7 +502,6 @@ TRANSACTION_TYPES = {
                 ("No exchanges for items damaged by customer misuse.", 
                  "Misuse voids exchange eligibility.")
             ],
-            # Version 7
             [
                 ("All exchanges require proof of original purchase.", 
                  "This ensures eligibility for all exchange requests."),  # Common condition
@@ -471,7 +514,6 @@ TRANSACTION_TYPES = {
                 ("Exchanges are free if the item is out of stock.", 
                  "Free exchanges compensate for unavailability.")
             ],
-            # Version 8
             [
                 ("All exchanges require proof of original purchase.", 
                  "This ensures eligibility for all exchange requests."),  # Common condition
@@ -484,7 +526,6 @@ TRANSACTION_TYPES = {
                 ("No exchanges during black Friday sales.", 
                  "Sales periods exclude exchange processing.")
             ],
-            # Version 9
             [
                 ("All exchanges require proof of original purchase.", 
                  "This ensures eligibility for all exchange requests."),  # Common condition
@@ -496,6 +537,29 @@ TRANSACTION_TYPES = {
                  "Quantity ensures fair exchange terms."),
                 ("Exchanges are denied if serial numbers are removed.", 
                  "Serial numbers are required for verification.")
+            ],
+            # --- New version with cross-transaction relationships ---
+            [
+                ("Exchanges are permitted for items purchased by credit card, subject to refund and exchange policies.",
+                 "Credit card exchanges may be refunded if the item is unavailable."),
+                ("Exchanges for items paid by bank transfer require the original account for any refund.",
+                 "Refunds for exchanges are processed within 7 business days."),
+                ("Exchanges for items paid by cryptocurrency are subject to conversion fees for any refund.",
+                 "Refunds are processed at the current exchange rate."),
+                ("If an exchange cannot be fulfilled due to out-of-stock items, a refund will be issued.",
+                 "Refunds for unfulfilled exchanges follow the standard refund process."),
+                ("Exchanges for bulk orders require manager approval and may be limited.",
+                 "Approval ensures compliance with bulk purchase and exchange terms."),
+                ("Exchanges for promotional items are not eligible for refunds.",
+                 "Promotional item exchanges are final."),
+                ("Exchanges for items received via transfer are subject to transfer and exchange policies.",
+                 "Refunds for such items are only available if defective."),
+                ("Exchanges for failed transfers are not permitted; a refund will be issued instead.",
+                 "Failed transfer exchanges are automatically refunded."),
+                ("Exchanges between linked accounts are processed within 24 hours.",
+                 "Linked account exchanges are expedited for convenience."),
+                ("Exchanges for international orders may incur additional fees and have limited refund options.",
+                 "Check international exchange terms for details.")
             ]
         ]
     }
@@ -718,7 +782,6 @@ def create_txt_file(transaction_type: str, conditions: list, version: int, secti
     print(f"Created {filename}")
 
 def generate_training_files(output_dir: str = "C:/Users/MSI/Desktop/CHATBOT/Flask/training_data") -> None:
-    """Generate multiple training files per transaction type in multiple formats."""
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 

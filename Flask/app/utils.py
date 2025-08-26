@@ -8,6 +8,7 @@ import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+import torch
 
 def clean_text(text: str) -> str:
     """
@@ -38,18 +39,21 @@ def extract_key_phrases(text: str, nlp_model) -> List[str]:
     
     return list(set(key_phrases))
 
-def calculate_semantic_similarity(text1: str, text2: str, nlp_model) -> float:
-    """
-    Calculate semantic similarity between two texts using spaCy
-    """
-    try:
-        doc1 = nlp_model(text1.lower())
-        doc2 = nlp_model(text2.lower())
-        return doc1.similarity(doc2)
-    except:
-        return 0.0
+# def calculate_semantic_similarity(text1: str, text2: str, nlp_model) -> float:
+#     """
+#     Calculate semantic similarity between two texts using spaCy
+#     """
+#     try:
+#         doc1 = nlp_model(text1.lower())
+#         doc2 = nlp_model(text2.lower())
+#         return doc1.similarity(doc2)
+#     except:
+#         return 0.0
+def calculate_semantic_similarity(text1: str, text2: str, sbert_model) -> float:
+    embeddings = sbert_model.encode([text1, text2], convert_to_tensor=True)
+    return float(torch.nn.functional.cosine_similarity(embeddings[0], embeddings[1], dim=0).item())
 
-def find_most_similar_sentences(query: str, sentences: List[str], nlp_model, top_k: int = 5) -> List[Tuple[str, float]]:
+def find_most_similar_sentences(query: str, sentences: List[str], sbert_model, top_k: int = 5) -> List[Tuple[str, float]]:
     """
     Find the most similar sentences to a query using multiple similarity metrics
     """
@@ -60,7 +64,7 @@ def find_most_similar_sentences(query: str, sentences: List[str], nlp_model, top
     
     for sentence in sentences:
         # Semantic similarity
-        semantic_sim = calculate_semantic_similarity(query, sentence, nlp_model)
+        semantic_sim = calculate_semantic_similarity(query, sentence, sbert_model)
         
         # TF-IDF similarity
         try:
