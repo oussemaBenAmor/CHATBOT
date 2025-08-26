@@ -235,10 +235,10 @@ def calculate_relevance_score(sentence: str, question_focus: List[str], question
     semantic_similarity = calculate_semantic_similarity(' '.join(question_focus), sentence, sbert_model)
     # You can keep TF-IDF and other features if you want, or just use SBERT
     return semantic_similarity
-def filter_relevant_sentences(sentences: List[str], question_focus: List[str], question_doc, threshold: float = 0.25) -> List[str]:
+def filter_relevant_sentences(sentences: List[str], question_focus: List[str], question_doc, sbert_model, threshold: float = 0.25) -> List[str]:
     relevant_sentences = []
     for sentence in sentences:
-        relevance = calculate_relevance_score(sentence, question_focus, question_doc)
+        relevance = calculate_relevance_score(sentence, question_focus, question_doc, sbert_model)
         if relevance > threshold:
             relevant_sentences.append((sentence, relevance))
     relevant_sentences.sort(key=lambda x: x[1], reverse=True)
@@ -448,6 +448,73 @@ def get_conditions_from_db(transaction_type: str) -> List[str]:
 #     for i, sentence in enumerate(relevant_sentences[:5], 1):
 #         answer += f"{i}. {sentence.strip()}\n"
 #     return answer
+
+
+
+# def generate_focused_answer(
+#     question: str,
+#     relevant_sentences: List[str],
+#     transaction_type: str,
+#     url_data: List[Dict] = None,
+#     file_content: str = None,
+#     question_focus: List[str] = None,
+#     question_doc = None
+# ) -> str:
+#     def dedup_and_clean(sentences: List[str]) -> List[str]:
+#         seen = set()
+#         cleaned = []
+#         for s in sentences:
+#             s = s.strip()
+#             # Skip table headers/section titles
+#             if re.match(r'^(Summary|Condition Type|Details|Explanation|Requirements?|Procedures?|Restrictions?|Timeframes?|Fees|Section|Contact)\b', s, re.IGNORECASE):
+#                  continue
+#             if len(s.split()) < 4:
+#                 continue
+#             if s and s not in seen:
+#                 cleaned.append(s)
+#                 seen.add(s)
+#         return cleaned
+
+#     # Helper to group sentences by keywords
+#     def group_sentences(sentences: List[str],sbert_model) -> Dict[str, List[str]]:
+#         groups = {"Refundability": [], "Processing": [], "Requirements": [], "Other": []}
+#         for s in sentences:
+#             s_lower = s.lower()
+#             if "refundable" in s_lower or "refund" in s_lower:
+#                 groups["Refundability"].append(s)
+#             elif "process" in s_lower or "processed" in s_lower or "time" in s_lower or "day" in s_lower:
+#                 groups["Processing"].append(s)
+#             elif "require" in s_lower or "condition" in s_lower or "eligible" in s_lower:
+#                 groups["Requirements"].append(s)
+#             else:
+#                 groups["Other"].append(s)
+#         return groups
+
+#     # If file content, use the existing logic
+#     if file_content:
+#         answer = f"📄 **Information from uploaded file about {transaction_type}:**\n\n"
+#         transaction_conditions = web_scraper.extract_transaction_conditions(file_content, transaction_type)
+#         if question_focus is not None and question_doc is not None:
+#             filtered_conditions = {
+#                 key: filter_conditions_by_relevance(val, question_focus, question_doc,sbert_model)
+#                 for key, val in transaction_conditions.items() if isinstance(val, list)
+#             }
+#         else:
+#             filtered_conditions = transaction_conditions
+
+#         for key in ['requirements', 'procedures', 'restrictions', 'timeframes', 'fees']:
+#             items = filtered_conditions.get(key, [])
+#             if items:
+#                 answer += f"**{key.capitalize()}:**\n"
+#                 for i, item in enumerate(items[:5], 1):
+#                     answer += f"{i}. {item}\n"
+#                 answer += "\n"
+#         if relevant_sentences and not any(filtered_conditions.values()):
+#             answer += "**Key Information:**\n"
+#             for i, sentence in enumerate(relevant_sentences[:10], 1):
+#                 answer += f"{i}. {sentence}\n"
+#         return answer
+
 def generate_focused_answer(
     question: str,
     relevant_sentences: List[str],
@@ -473,7 +540,7 @@ def generate_focused_answer(
         return cleaned
 
     # Helper to group sentences by keywords
-    def group_sentences(sentences: List[str],sbert_model) -> Dict[str, List[str]]:
+    def group_sentences(sentences: List[str], sbert_model) -> Dict[str, List[str]]:
         groups = {"Refundability": [], "Processing": [], "Requirements": [], "Other": []}
         for s in sentences:
             s_lower = s.lower()
@@ -493,7 +560,7 @@ def generate_focused_answer(
         transaction_conditions = web_scraper.extract_transaction_conditions(file_content, transaction_type)
         if question_focus is not None and question_doc is not None:
             filtered_conditions = {
-                key: filter_conditions_by_relevance(val, question_focus, question_doc,sbert_model)
+                key: filter_conditions_by_relevance(val, question_focus, question_doc, sbert_model)
                 for key, val in transaction_conditions.items() if isinstance(val, list)
             }
         else:
@@ -511,6 +578,43 @@ def generate_focused_answer(
             for i, sentence in enumerate(relevant_sentences[:10], 1):
                 answer += f"{i}. {sentence}\n"
         return answer
+
+    # If web data, use the existing logic
+    if url_data and any(d['status'] == 'success' for d in url_data):
+        answer = f"📎 **Information from websites about {transaction_type}:**\n\n"
+        for url_info in url_data:
+            if url_info['status'] == 'success':
+                answer += f"**From: {url_info['title']}**\n"
+                answer += f"**URL:** {url_info['url']}\n\n"
+                if 'transaction_conditions' in url_info and url_info['transaction_conditions']:
+                    conditions = url_info['transaction_conditions']
+                    for key in ['requirements', 'procedures', 'restrictions', 'timeframes', 'fees', 'general_info']:
+                        items = conditions.get(key, [])
+                        if items:
+                            answer += f"**{key.capitalize()}:**\n"
+                            for i, item in enumerate(items, 1):
+                                answer += f"{i}. {item}\n"
+                            answer += "\n"
+                answer += "─" * 50 + "\n\n"
+        return answer
+
+    # For DB or fallback, organize and deduplicate
+    if not relevant_sentences:
+        return f"No specific information found about {question.lower()} for {transaction_type}."
+
+    deduped = dedup_and_clean(relevant_sentences)
+    groups = group_sentences(deduped, sbert_model)
+
+    answer = f"**Here's what I found about {transaction_type} (organized):**\n\n"
+    for section, items in groups.items():
+        if items:
+            answer += f"**{section}:**\n"
+            for i, item in enumerate(items, 1):
+                answer += f"{i}. {item}\n"
+            answer += "\n"
+    return answer.strip()
+
+
 
     # If web data, use the existing logic
     # if url_data and any(d['status'] == 'success' for d in url_data):
