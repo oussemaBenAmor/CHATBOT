@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Transaction Assistant</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-robot"></i> AI Transaction Assistant</h1>
+      <p>Ask me anything about refunds, payments, transfers, or exchanges</p>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+      <div class="welcome-message">
+        <i class="fas fa-comments"></i>
+        <h2>Welcome to your AI Assistant!</h2>
+        <p>I can help you with questions about various transaction types. Simply ask me anything or upload a document for specific information.</p>
+      </div>
+  </div>
+
+    <div class="input-section">
+      <div class="quick-actions">
+        <div class="quick-action" onclick="askQuickQuestion('How do I get a refund?')">How do I get a refund?</div>
+        <div class="quick-action" onclick="askQuickQuestion('What payment methods do you accept?')">Payment methods</div>
+        <div class="quick-action" onclick="askQuickQuestion('How do I transfer money?')">Money transfer</div>
+        <div class="quick-action" onclick="askQuickQuestion('Can I exchange an item?')">Item exchange</div>
+      </div>
+      
+      <div class="input-container">
+        <label class="file-upload" for="fileInput">
+          <i class="fas fa-paperclip"></i>
+          <input type="file" name="file" id="fileInput" accept=".pdf,.doc,.docx,.xls,.xlsx,.txt" />
+        </label>
+        
+        <input type="text" name="question" id="questionInput" class="question-input" placeholder="Ask me anything about transactions..." required />
+        
+        <button type="submit" id="sendButton" class="send-button">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+      
+      <div id="fileStatus" class="file-status"></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

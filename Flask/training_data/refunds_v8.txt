@@ -1,0 +1,35 @@
+Refunds Policy - Version 8
+
+1. Purpose
+This document outlines the policy for refunds handled by our organization.
+
+2. Policy Summary
+We aim to ensure all refunds are processed efficiently. Contact support@company.com for issues or clarifications.
+
+3. Refund Eligibility
+All refunds require a valid receipt or order number.
+This ensures eligibility for all refund processing.
+
+4. Refund Eligibility
+Refunds for returned gifts require donor consent.
+Consent ensures the original purchaser agrees to the return.
+
+5. Return Requirements
+Refunds are issued as cash for returns over $100.
+Cash refunds apply to higher-value transactions.
+
+6. Refund Procedures
+Refunds for warranty claims are expedited by 2 days.
+Expedited processing supports warranty-covered items.
+Refunds are tracked via a unique refund ID.
+ID allows customers to monitor refund status online.
+
+7. Summary
+- Refunds: All refunds require a valid receipt or order number. (This ensures eligibility for all refund processing.)
+- Refunds: Refunds for returned gifts require donor consent. (Consent ensures the original purchaser agrees to the return.)
+- Refunds: Refunds are issued as cash for returns over $100. (Cash refunds apply to higher-value transactions.)
+- Refunds: Refunds for warranty claims are expedited by 2 days. (Expedited processing supports warranty-covered items.)
+- Refunds: Refunds are tracked via a unique refund ID. (ID allows customers to monitor refund status online.)
+
+8. Contact
+For queries, email support@company.com or call 0800-123-456 during business hours (9 AM - 5 PM, Monday to Friday).

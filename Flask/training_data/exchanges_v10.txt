@@ -1,0 +1,50 @@
+Exchanges Policy - Version 10
+
+1. Purpose
+This document outlines the policy for exchanges handled by our organization.
+
+2. Policy Summary
+We aim to ensure all exchanges are processed efficiently. Contact support@company.com for issues or clarifications.
+
+3. Exchange Criteria
+Exchanges are permitted for items purchased by credit card, subject to refund and exchange policies.
+Credit card exchanges may be refunded if the item is unavailable.
+
+4. Exchange Criteria
+Exchanges for items paid by bank transfer require the original account for any refund.
+Refunds for exchanges are processed within 7 business days.
+
+5. Exchange Process
+Exchanges for items paid by cryptocurrency are subject to conversion fees for any refund.
+Refunds are processed at the current exchange rate.
+
+6. Exchange Terms
+If an exchange cannot be fulfilled due to out-of-stock items, a refund will be issued.
+Refunds for unfulfilled exchanges follow the standard refund process.
+Exchanges for bulk orders require manager approval and may be limited.
+Approval ensures compliance with bulk purchase and exchange terms.
+Exchanges for promotional items are not eligible for refunds.
+Promotional item exchanges are final.
+Exchanges for items received via transfer are subject to transfer and exchange policies.
+Refunds for such items are only available if defective.
+Exchanges for failed transfers are not permitted; a refund will be issued instead.
+Failed transfer exchanges are automatically refunded.
+Exchanges between linked accounts are processed within 24 hours.
+Linked account exchanges are expedited for convenience.
+Exchanges for international orders may incur additional fees and have limited refund options.
+Check international exchange terms for details.
+
+7. Summary
+- Exchanges: Exchanges are permitted for items purchased by credit card, subject to refund and exchange policies. (Credit card exchanges may be refunded if the item is unavailable.)
+- Exchanges: Exchanges for items paid by bank transfer require the original account for any refund. (Refunds for exchanges are processed within 7 business days.)
+- Exchanges: Exchanges for items paid by cryptocurrency are subject to conversion fees for any refund. (Refunds are processed at the current exchange rate.)
+- Exchanges: If an exchange cannot be fulfilled due to out-of-stock items, a refund will be issued. (Refunds for unfulfilled exchanges follow the standard refund process.)
+- Exchanges: Exchanges for bulk orders require manager approval and may be limited. (Approval ensures compliance with bulk purchase and exchange terms.)
+- Exchanges: Exchanges for promotional items are not eligible for refunds. (Promotional item exchanges are final.)
+- Exchanges: Exchanges for items received via transfer are subject to transfer and exchange policies. (Refunds for such items are only available if defective.)
+- Exchanges: Exchanges for failed transfers are not permitted; a refund will be issued instead. (Failed transfer exchanges are automatically refunded.)
+- Exchanges: Exchanges between linked accounts are processed within 24 hours. (Linked account exchanges are expedited for convenience.)
+- Exchanges: Exchanges for international orders may incur additional fees and have limited refund options. (Check international exchange terms for details.)
+
+8. Contact
+For queries, email support@company.com or call 0800-123-456 during business hours (9 AM - 5 PM, Monday to Friday).

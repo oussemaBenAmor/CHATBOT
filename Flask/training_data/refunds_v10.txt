@@ -1,0 +1,50 @@
+Refunds Policy - Version 10
+
+1. Purpose
+This document outlines the policy for refunds handled by our organization.
+
+2. Policy Summary
+We aim to ensure all refunds are processed efficiently. Contact support@company.com for issues or clarifications.
+
+3. Refund Eligibility
+Payments made by credit card are refundable if the item is unused and in saleable condition.
+Refunds for credit card payments are processed within 5 business days to the original card.
+
+4. Refund Eligibility
+Payments made by bank transfer are refundable to the original bank account within 7 business days.
+A valid bank account must be provided for refund processing.
+
+5. Return Requirements
+Refunds are not available for payments made in cash for international orders.
+International cash payments are final and non-refundable.
+
+6. Refund Procedures
+Failed transfers are automatically refunded within 48 hours.
+Refunds for failed transfers are processed to the original payment method.
+If an exchange cannot be fulfilled due to out-of-stock items, a refund will be issued.
+Refunds for unfulfilled exchanges follow the standard refund process.
+Refund requests for payments made during promotional events are subject to special conditions.
+Promotional event refunds may be limited or delayed.
+Refunds for items received via exchange are only available if the exchanged item is defective.
+Refunds are not issued for change of mind after an exchange.
+Refunds for payments made by cryptocurrency are processed at the current exchange rate.
+Cryptocurrency refunds may be subject to conversion fees.
+Refunds for bulk payments require manager approval and may be prorated.
+Approval ensures compliance with bulk purchase terms.
+Refunds for transfers between linked accounts are processed within 24 hours.
+Linked account refunds are expedited for customer convenience.
+
+7. Summary
+- Refunds: Payments made by credit card are refundable if the item is unused and in saleable condition. (Refunds for credit card payments are processed within 5 business days to the original card.)
+- Refunds: Payments made by bank transfer are refundable to the original bank account within 7 business days. (A valid bank account must be provided for refund processing.)
+- Refunds: Refunds are not available for payments made in cash for international orders. (International cash payments are final and non-refundable.)
+- Refunds: Failed transfers are automatically refunded within 48 hours. (Refunds for failed transfers are processed to the original payment method.)
+- Refunds: If an exchange cannot be fulfilled due to out-of-stock items, a refund will be issued. (Refunds for unfulfilled exchanges follow the standard refund process.)
+- Refunds: Refund requests for payments made during promotional events are subject to special conditions. (Promotional event refunds may be limited or delayed.)
+- Refunds: Refunds for items received via exchange are only available if the exchanged item is defective. (Refunds are not issued for change of mind after an exchange.)
+- Refunds: Refunds for payments made by cryptocurrency are processed at the current exchange rate. (Cryptocurrency refunds may be subject to conversion fees.)
+- Refunds: Refunds for bulk payments require manager approval and may be prorated. (Approval ensures compliance with bulk purchase terms.)
+- Refunds: Refunds for transfers between linked accounts are processed within 24 hours. (Linked account refunds are expedited for customer convenience.)
+
+8. Contact
+For queries, email support@company.com or call 0800-123-456 during business hours (9 AM - 5 PM, Monday to Friday).

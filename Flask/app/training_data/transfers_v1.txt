@@ -1,0 +1,35 @@
+Transfers Policy - Version 1
+
+1. Purpose
+This document outlines the policy for transfers handled by our organization.
+
+2. Policy Summary
+We aim to ensure all transfers are processed efficiently. Contact support@company.com for issues or clarifications.
+
+3. Transfer Guidelines
+Transfers are processed within 3 business days for domestic accounts.
+Domestic transfers are prioritized for quick processing.
+
+4. Transfer Guidelines
+International transfers incur a 2% processing fee.
+This fee covers international banking charges.
+
+5. Transfer Policies
+Transfers require verification of recipient bank details.
+Verification ensures accuracy and security of transfers.
+
+6. Transfer Conditions
+No transfers are allowed to unverified accounts.
+Unverified accounts pose a risk to transaction security.
+Transfer disputes must be reported within 5 days.
+Timely reporting ensures disputes are handled efficiently.
+
+7. Summary
+- Transfers: Transfers are processed within 3 business days for domestic accounts. (Domestic transfers are prioritized for quick processing.)
+- Transfers: International transfers incur a 2% processing fee. (This fee covers international banking charges.)
+- Transfers: Transfers require verification of recipient bank details. (Verification ensures accuracy and security of transfers.)
+- Transfers: No transfers are allowed to unverified accounts. (Unverified accounts pose a risk to transaction security.)
+- Transfers: Transfer disputes must be reported within 5 days. (Timely reporting ensures disputes are handled efficiently.)
+
+8. Contact
+For queries, email support@company.com or call 0800-123-456 during business hours (9 AM - 5 PM, Monday to Friday).

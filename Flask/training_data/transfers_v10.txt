@@ -1,0 +1,50 @@
+Transfers Policy - Version 10
+
+1. Purpose
+This document outlines the policy for transfers handled by our organization.
+
+2. Policy Summary
+We aim to ensure all transfers are processed efficiently. Contact support@company.com for issues or clarifications.
+
+3. Transfer Guidelines
+Transfers that fail due to incorrect recipient details are refunded within 48 hours.
+Refunds are processed to the original payment method.
+
+4. Transfer Guidelines
+Transfers made as payment for goods are refundable if the goods are returned and meet refund conditions.
+Refunds for such transfers follow the standard refund process.
+
+5. Transfer Policies
+Transfers between linked accounts can be reversed within 24 hours upon request.
+Reversals are expedited for customer convenience.
+
+6. Transfer Conditions
+Transfers used for exchanges are adjusted based on the price difference.
+If the exchanged item is cheaper, the difference is refunded; if more expensive, additional transfer is required.
+International transfers are non-refundable once processed, except in case of failure.
+Failed international transfers are refunded automatically.
+Transfers for bulk orders require manager approval for refunds.
+Approval ensures compliance with bulk purchase terms.
+Transfers made by cryptocurrency are refundable at the current exchange rate if the transfer fails.
+Conversion fees may apply for cryptocurrency refunds.
+Transfers for promotional items are non-refundable.
+Promotional item transfers are final.
+Transfers for items received via exchange are subject to the exchange policy.
+Refunds for exchanged items are only available if defective.
+Transfers to unverified accounts are automatically refunded.
+Unverified account transfers are not permitted.
+
+7. Summary
+- Transfers: Transfers that fail due to incorrect recipient details are refunded within 48 hours. (Refunds are processed to the original payment method.)
+- Transfers: Transfers made as payment for goods are refundable if the goods are returned and meet refund conditions. (Refunds for such transfers follow the standard refund process.)
+- Transfers: Transfers between linked accounts can be reversed within 24 hours upon request. (Reversals are expedited for customer convenience.)
+- Transfers: Transfers used for exchanges are adjusted based on the price difference. (If the exchanged item is cheaper, the difference is refunded; if more expensive, additional transfer is required.)
+- Transfers: International transfers are non-refundable once processed, except in case of failure. (Failed international transfers are refunded automatically.)
+- Transfers: Transfers for bulk orders require manager approval for refunds. (Approval ensures compliance with bulk purchase terms.)
+- Transfers: Transfers made by cryptocurrency are refundable at the current exchange rate if the transfer fails. (Conversion fees may apply for cryptocurrency refunds.)
+- Transfers: Transfers for promotional items are non-refundable. (Promotional item transfers are final.)
+- Transfers: Transfers for items received via exchange are subject to the exchange policy. (Refunds for exchanged items are only available if defective.)
+- Transfers: Transfers to unverified accounts are automatically refunded. (Unverified account transfers are not permitted.)
+
+8. Contact
+For queries, email support@company.com or call 0800-123-456 during business hours (9 AM - 5 PM, Monday to Friday).

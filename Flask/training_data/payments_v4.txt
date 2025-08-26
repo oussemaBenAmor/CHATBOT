@@ -1,0 +1,35 @@
+Payments Policy - Version 4
+
+1. Purpose
+This document outlines the policy for payments handled by our organization.
+
+2. Policy Summary
+We aim to ensure all payments are processed efficiently. Contact support@company.com for issues or clarifications.
+
+3. Payment Processing
+All payments must include a transaction reference number.
+This ensures accurate tracking of each payment.
+
+4. Payment Processing
+Payments via mobile wallet are processed within 2 hours.
+Mobile wallet transactions use real-time verification.
+
+5. Payment Methods
+Split payments are allowed with a 1.5% surcharge.
+Surcharge covers additional processing for split transactions.
+
+6. Payment Rules
+Payments exceeding $500 require two-factor authentication.
+Security is enhanced for large transactions.
+Payment failures trigger an automatic retry after 24 hours.
+Retries ensure payment completion without manual intervention.
+
+7. Summary
+- Payments: All payments must include a transaction reference number. (This ensures accurate tracking of each payment.)
+- Payments: Payments via mobile wallet are processed within 2 hours. (Mobile wallet transactions use real-time verification.)
+- Payments: Split payments are allowed with a 1.5% surcharge. (Surcharge covers additional processing for split transactions.)
+- Payments: Payments exceeding $500 require two-factor authentication. (Security is enhanced for large transactions.)
+- Payments: Payment failures trigger an automatic retry after 24 hours. (Retries ensure payment completion without manual intervention.)
+
+8. Contact
+For queries, email support@company.com or call 0800-123-456 during business hours (9 AM - 5 PM, Monday to Friday).
