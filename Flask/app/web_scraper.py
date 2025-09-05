@@ -1,6 +1,4 @@
-"""
-Enhanced web scraping functionality for extracting transaction information and conditions from URLs
-"""
+
 
 import requests
 from bs4 import BeautifulSoup
@@ -84,12 +82,10 @@ class WebScraper:
         ]
         
     def extract_urls_from_text(self, text: str) -> List[str]:
-        """Extract URLs from text using stricter regex to avoid false positives"""
         # Enhanced URL pattern for full URLs
         url_pattern = r'https?://(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(?::\d+)?(?:/[a-zA-Z0-9-_./?=&%#]*)?'
         urls = re.findall(url_pattern, text)
         
-        # URLs without protocol (e.g., www.example.com)
         no_protocol_pattern = r'(?:www\.)[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?::\d+)?(?:/[a-zA-Z0-9-_./?=&%#]*)?'
         no_protocol_urls = re.findall(no_protocol_pattern, text)
         
@@ -321,36 +317,7 @@ class WebScraper:
             relevant_sentences = [s.strip() for s in sentences if len(s.strip()) > 20][:30]
         return '. '.join(relevant_sentences[:50])
     
-    # def extract_transaction_conditions(self, content: str, transaction_type: str) -> Dict[str, List[str]]:
-    #     """Extract specific transaction conditions and requirements for any transaction type"""
-    #     conditions = {
-    #         'requirements': [], 'timeframes': [], 'fees': [], 'restrictions': [], 'procedures': [], 'general_info': []
-    #     }
-    #     sentences = re.split(r'[.!?]+', content)
-    #     for sentence in sentences:
-    #         sentence = sentence.strip()
-    #         if len(sentence) < 15:
-    #             continue
-    #         sentence_lower = sentence.lower()
-    #         if any(word in sentence_lower for word in ['require', 'need', 'must', 'should', 'have to', 'eligible', 'condition', 'qualify', 'prerequisite']):
-    #             conditions['requirements'].append(sentence)
-    #         elif any(word in sentence_lower for word in ['fee', 'cost', 'charge', 'price', '$', 'percent', '%', '€', 'euro', 'dollar', 'pound', 'yen', 'amount', 'rate']):
-    #             conditions['fees'].append(sentence)
-    #         elif any(word in sentence_lower for word in ['day', 'week', 'month', 'hour', 'time', 'deadline', 'period', 'duration', 'limit', 'expiry', 'valid']):
-    #             conditions['timeframes'].append(sentence)
-    #         elif any(word in sentence_lower for word in ['cannot', 'not allowed', 'prohibited', 'restricted', 'limit', 'not eligible', 'exclusive', 'forbidden', 'banned', 'excluded']):
-    #             conditions['restrictions'].append(sentence)
-    #         elif any(word in sentence_lower for word in ['step', 'process', 'procedure', 'how to', 'follow', 'complete', 'submit', 'fill', 'form', 'application', 'request']):
-    #             conditions['procedures'].append(sentence)
-    #         elif any(word in sentence_lower for word in ['policy', 'terms', 'conditions', 'rules', 'guidelines', 'information', 'details', 'note', 'important', 'attention']):
-    #             conditions['general_info'].append(sentence)
-    #         elif re.search(r'\d+', sentence) and len(sentence) > 20:
-    #             conditions['general_info'].append(sentence)
-    #         elif any(term in sentence_lower for term in ['€', 'euro', 'dollar', '$', 'pound', '£', '¥', 'yen']):
-    #             conditions['fees'].append(sentence)
-    #     for category in conditions:
-    #         conditions[category] = conditions[category][:8]
-    #     return conditions
+    
     def extract_transaction_conditions(self, content: str, transaction_type: str) -> Dict[str, List[str]]:
         """
         Extract transaction conditions and requirements for any transaction type, organized by category.
@@ -378,7 +345,6 @@ class WebScraper:
                     break
             if not found and len(sentence) > 20:
                 conditions['general_info'].append(sentence)
-    # Limit each category to 8 items
         for category in conditions:
             conditions[category] = conditions[category][:8]
         return conditions

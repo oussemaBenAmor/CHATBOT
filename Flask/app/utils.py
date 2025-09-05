@@ -11,9 +11,7 @@ import numpy as np
 import torch
 
 def clean_text(text: str) -> str:
-    """
-    Clean and normalize text for better processing
-    """
+   
     # Remove extra whitespace
     text = re.sub(r'\s+', ' ', text)
     # Remove special characters but keep basic punctuation
@@ -27,36 +25,23 @@ def extract_key_phrases(text: str, nlp_model) -> List[str]:
     doc = nlp_model(text)
     key_phrases = []
     
-    # Extract noun chunks
     for chunk in doc.noun_chunks:
         if len(chunk.text.strip()) > 2:
             key_phrases.append(chunk.text.strip().lower())
     
-    # Extract named entities
     for ent in doc.ents:
         if ent.label_ in ['ORG', 'MONEY', 'DATE', 'TIME', 'LOC']:
             key_phrases.append(ent.text.strip().lower())
     
     return list(set(key_phrases))
 
-# def calculate_semantic_similarity(text1: str, text2: str, nlp_model) -> float:
-#     """
-#     Calculate semantic similarity between two texts using spaCy
-#     """
-#     try:
-#         doc1 = nlp_model(text1.lower())
-#         doc2 = nlp_model(text2.lower())
-#         return doc1.similarity(doc2)
-#     except:
-#         return 0.0
+
 def calculate_semantic_similarity(text1: str, text2: str, sbert_model) -> float:
     embeddings = sbert_model.encode([text1, text2], convert_to_tensor=True)
     return float(torch.nn.functional.cosine_similarity(embeddings[0], embeddings[1], dim=0).item())
 
 def find_most_similar_sentences(query: str, sentences: List[str], sbert_model, top_k: int = 5) -> List[Tuple[str, float]]:
-    """
-    Find the most similar sentences to a query using multiple similarity metrics
-    """
+    
     if not sentences:
         return []
     
@@ -83,9 +68,7 @@ def find_most_similar_sentences(query: str, sentences: List[str], sbert_model, t
     return similarities[:top_k]
 
 def categorize_transaction_question(question: str) -> Dict[str, float]:
-    """
-    Categorize a question by transaction type with confidence scores
-    """
+    
     transaction_categories = {
         'refunds': ['refund', 'return', 'credit', 'money back', 'reimbursement'],
         'payments': ['payment', 'pay', 'card', 'bank', 'cash', 'transfer'],
@@ -107,9 +90,7 @@ def categorize_transaction_question(question: str) -> Dict[str, float]:
     return scores
 
 def extract_question_intent(question: str) -> str:
-    """
-    Extract the intent of a question (what, how, when, where, why, which, who)
-    """
+   
     question_lower = question.lower()
     
     if question_lower.startswith('what'):
@@ -130,9 +111,7 @@ def extract_question_intent(question: str) -> str:
         return 'general'
 
 def format_answer_for_intent(intent: str, relevant_info: List[str], transaction_type: str) -> str:
-    """
-    Format the answer based on the detected intent
-    """
+    
     if not relevant_info:
         return f"No specific information found about {transaction_type}."
     

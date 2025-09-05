@@ -9,12 +9,10 @@ from docx.shared import Inches
 import openpyxl
 from datetime import datetime
 
-# Define transaction types, condition variations, section titles, and explanations
 TRANSACTION_TYPES = {
     "refunds": {
         "section_titles": ["Refund Eligibility", "Return Requirements", "Refund Procedures"],
         "versions": [
-            # ...existing versions...
             [
                 ("Refunds are issued within 14 days for defective products.", 
                  "Only products verified as defective by our team qualify for refunds within this period."),
@@ -123,7 +121,6 @@ TRANSACTION_TYPES = {
                 ("Refunds are processed offline during network failures.", 
                  "Offline processing ensures continuity during outages.")
             ],
-            # --- New version with cross-transaction relationships ---
             [
                 # Refunds related to payments
                 ("Payments made by credit card are refundable if the item is unused and in saleable condition.",
@@ -155,7 +152,6 @@ TRANSACTION_TYPES = {
     "payments": {
         "section_titles": ["Payment Processing", "Payment Methods", "Payment Rules"],
         "versions": [
-            # ...existing versions...
             [
                 ("Payments by credit card are processed immediately.", 
                  "Credit card transactions are verified and completed instantly."),
@@ -264,7 +260,6 @@ TRANSACTION_TYPES = {
                 ("Payment records are archived for 5 years.", 
                  "Archiving complies with regulatory requirements.")
             ],
-            # --- New version with cross-transaction relationships ---
             [
                 ("Payments made by credit card are eligible for refunds if the item meets refund conditions.",
                  "Refunds for credit card payments are processed within 5 business days."),
@@ -292,7 +287,6 @@ TRANSACTION_TYPES = {
     "transfers": {
         "section_titles": ["Transfer Guidelines", "Transfer Policies", "Transfer Conditions"],
         "versions": [
-            # ...existing versions...
             [
                 ("Transfers are processed within 3 business days for domestic accounts.", 
                  "Domestic transfers are prioritized for quick processing."),
@@ -401,7 +395,6 @@ TRANSACTION_TYPES = {
                 ("Transfer fees are waived for first-time users.", 
                  "Waiver encourages new customer adoption.")
             ],
-            # --- New version with cross-transaction relationships ---
             [
                 ("Transfers that fail due to incorrect recipient details are refunded within 48 hours.",
                  "Refunds are processed to the original payment method."),
@@ -429,7 +422,6 @@ TRANSACTION_TYPES = {
     "exchanges": {
         "section_titles": ["Exchange Criteria", "Exchange Process", "Exchange Terms"],
         "versions": [
-            # ...existing versions...
             [
                 ("Exchanges are allowed within 7 days for defective items.", 
                  "Defective items qualify for exchange within this period."),
@@ -538,7 +530,6 @@ TRANSACTION_TYPES = {
                 ("Exchanges are denied if serial numbers are removed.", 
                  "Serial numbers are required for verification.")
             ],
-            # --- New version with cross-transaction relationships ---
             [
                 ("Exchanges are permitted for items purchased by credit card, subject to refund and exchange policies.",
                  "Credit card exchanges may be refunded if the item is unavailable."),

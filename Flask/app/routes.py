@@ -98,12 +98,7 @@ def extract_text_from_pdf(file_path: str) -> str:
     return text
 
 
-# def filter_conditions_by_relevance(conditions: list, question_focus: list, question_doc, threshold: float = 0.25) -> list:
-#     """Filter a list of conditions for relevance to the question."""
-#     return [
-#         cond for cond in conditions
-#         if calculate_relevance_score(cond, question_focus, question_doc) > threshold
-#     ]
+
 def filter_conditions_by_relevance(conditions: list, question_focus: list, question_doc, sbert_model, threshold: float = 0.25) -> list:
     """Filter a list of conditions for relevance to the question using SBERT."""
     return [
@@ -215,25 +210,10 @@ def extract_question_focus(question: str) -> List[str]:
     focus_words.extend(key_phrases)
     return list(set(focus_words))
 
-# def calculate_relevance_score(sentence: str, question_focus: List[str], question_doc) -> float:
-#     sentence_doc = nlp(sentence.lower())
-#     try:
-#         vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 2))
-#         tfidf_matrix = vectorizer.fit_transform([sentence.lower(), ' '.join(question_focus)])
-#         tfidf_similarity = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0]
-#     except:
-#         tfidf_similarity = 0.0
-#     semantic_similarity = question_doc.similarity(sentence_doc)
-#     sentence_words = set(sentence.lower().split())
-#     keyword_overlap = len(set(question_focus) & sentence_words) / len(question_focus) if question_focus else 0
-#     sentence_key_phrases = extract_key_phrases(sentence, nlp)
-#     phrase_overlap = len(set(question_focus) & set(sentence_key_phrases)) / len(question_focus) if question_focus else 0
-#     # Increase semantic similarity weight
-#     return (tfidf_similarity * 0.2 + semantic_similarity * 0.5 + keyword_overlap * 0.15 + phrase_overlap * 0.15)
+
 def calculate_relevance_score(sentence: str, question_focus: List[str], question_doc, sbert_model) -> float:
     # Use SBERT for semantic similarity
     semantic_similarity = calculate_semantic_similarity(' '.join(question_focus), sentence, sbert_model)
-    # You can keep TF-IDF and other features if you want, or just use SBERT
     return semantic_similarity
 def filter_relevant_sentences(sentences: List[str], question_focus: List[str], question_doc, sbert_model, threshold: float = 0.25) -> List[str]:
     relevant_sentences = []
@@ -296,224 +276,6 @@ def get_conditions_from_db(transaction_type: str) -> List[str]:
         print(f"Error querying MongoDB for {transaction_type}: {e}")
         return []
 
-# def generate_focused_answer(question: str, relevant_sentences: List[str], transaction_type: str, url_data: List[Dict] = None, file_content: str = None) -> str:
-#     if file_content:
-#         answer = f"📄 **Information from uploaded file about {transaction_type}:**\n\n"
-#         sentences = re.split(r'[.!?]+', file_content)
-#         relevant_sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
-#         transaction_conditions = web_scraper.extract_transaction_conditions(file_content, transaction_type)
-#         if transaction_conditions.get('requirements'):
-#             answer += "**Requirements:**\n"
-#             for i, req in enumerate(transaction_conditions['requirements'][:5], 1):
-#                 answer += f"{i}. {req}\n"
-#             answer += "\n"
-#         if transaction_conditions.get('procedures'):
-#             answer += "**Procedures:**\n"
-#             for i, proc in enumerate(transaction_conditions['procedures'][:5], 1):
-#                 answer += f"{i}. {proc}\n"
-#             answer += "\n"
-#         if transaction_conditions.get('restrictions'):
-#             answer += "**Restrictions:**\n"
-#             for i, restriction in enumerate(transaction_conditions['restrictions'][:5], 1):
-#                 answer += f"{i}. {restriction}\n"
-#             answer += "\n"
-#         if transaction_conditions.get('timeframes'):
-#             answer += "**Timeframes:**\n"
-#             for i, time in enumerate(transaction_conditions['timeframes'][:5], 1):
-#                 answer += f"{i}. {time}\n"
-#             answer += "\n"
-#         if transaction_conditions.get('fees'):
-#             answer += "**Fees & Costs:**\n"
-#             for i, fee in enumerate(transaction_conditions['fees'][:5], 1):
-#                 answer += f"{i}. {fee}\n"
-#             answer += "\n"
-#         if relevant_sentences and not any(transaction_conditions.values()):
-#             answer += "**Key Information:**\n"
-#             for i, sentence in enumerate(relevant_sentences[:10], 1):
-#                 answer += f"{i}. {sentence}\n"
-#         return answer
-#     if url_data and any(d['status'] == 'success' for d in url_data):
-#         answer = f"📎 **Information from websites about {transaction_type}:**\n\n"
-#         for url_info in url_data:
-#             if url_info['status'] == 'success':
-#                 answer += f"**From: {url_info['title']}**\n"
-#                 answer += f"**URL:** {url_info['url']}\n\n"
-#                 if url_info.get('raw_content'):
-#                     content = url_info['raw_content']
-#                     sentences = re.split(r'[.!?]+', content)
-#                     relevant_sentences_from_url = [s.strip() for s in sentences if len(s.strip()) > 20][:15]
-#                     answer += "**Key Information:**\n"
-#                     for i, sentence in enumerate(relevant_sentences_from_url, 1):
-#                         answer += f"{i}. {sentence}\n"
-#                     answer += "\n" + "─" * 50 + "\n\n"
-#                 elif 'transaction_conditions' in url_info and url_info['transaction_conditions']:
-#                     conditions = url_info['transaction_conditions']
-#                     if conditions.get('requirements'):
-#                         answer += "**Requirements:**\n"
-#                         for i, req in enumerate(conditions['requirements'][:5], 1):
-#                             answer += f"{i}. {req}\n"
-#                         answer += "\n"
-#                     if conditions.get('procedures'):
-#                         answer += "**Procedures:**\n"
-#                         for i, proc in enumerate(conditions['procedures'][:5], 1):
-#                             answer += f"{i}. {proc}\n"
-#                         answer += "\n"
-#                     if conditions.get('restrictions'):
-#                         answer += "**Restrictions:**\n"
-#                         for i, restriction in enumerate(conditions['restrictions'][:5], 1):
-#                             answer += f"{i}. {restriction}\n"
-#                         answer += "\n"
-#                     if conditions.get('timeframes'):
-#                         answer += "**Timeframes:**\n"
-#                         for i, time in enumerate(conditions['timeframes'][:5], 1):
-#                             answer += f"{i}. {time}\n"
-#                         answer += "\n"
-#                     if conditions.get('fees'):
-#                         answer += "**Fees & Costs:**\n"
-#                         for i, fee in enumerate(conditions['fees'][:5], 1):
-#                             answer += f"{i}. {fee}\n"
-#                         answer += "\n"
-#                     answer += "─" * 50 + "\n\n"
-#         return answer
-#     if not relevant_sentences:
-#         return f"No specific information found about {question.lower()} for {transaction_type}."
-#     answer = f"Here's what I found about {transaction_type}:\n\n"
-#     for i, sentence in enumerate(relevant_sentences[:5], 1):
-#         answer += f"{i}. {sentence.strip()}\n"
-#     return answer
-# def generate_focused_answer(
-#     question: str,
-#     relevant_sentences: List[str],
-#     transaction_type: str,
-#     url_data: List[Dict] = None,
-#     file_content: str = None,
-#     question_focus: List[str] = None,
-#     question_doc = None
-# ) -> str:
-#     if file_content:
-#         answer = f"📄 **Information from uploaded file about {transaction_type}:**\n\n"
-#         transaction_conditions = web_scraper.extract_transaction_conditions(file_content, transaction_type)
-#         # Filter each condition type for relevance if question_focus and question_doc are provided
-#         if question_focus is not None and question_doc is not None:
-#             filtered_conditions = {
-#                 key: filter_conditions_by_relevance(val, question_focus, question_doc)
-#                 for key, val in transaction_conditions.items() if isinstance(val, list)
-#             }
-#         else:
-#             filtered_conditions = transaction_conditions
-
-#         for key in ['requirements', 'procedures', 'restrictions', 'timeframes', 'fees']:
-#             items = filtered_conditions.get(key, [])
-#             if items:
-#                 answer += f"**{key.capitalize()}:**\n"
-#                 for i, item in enumerate(items[:5], 1):
-#                     answer += f"{i}. {item}\n"
-#                 answer += "\n"
-#         # Fallback to relevant sentences if no relevant conditions found
-#         if relevant_sentences and not any(filtered_conditions.values()):
-#             answer += "**Key Information:**\n"
-#             for i, sentence in enumerate(relevant_sentences[:10], 1):
-#                 answer += f"{i}. {sentence}\n"
-#         return answer
-
-#     if url_data and any(d['status'] == 'success' for d in url_data):
-#         answer = f"📎 **Information from websites about {transaction_type}:**\n\n"
-#         for url_info in url_data:
-#             if url_info['status'] == 'success':
-#                 answer += f"**From: {url_info['title']}**\n"
-#                 answer += f"**URL:** {url_info['url']}\n\n"
-#                 if url_info.get('raw_content'):
-#                     content = url_info['raw_content']
-#                     sentences = re.split(r'[.!?]+', content)
-#                     relevant_sentences_from_url = [s.strip() for s in sentences if len(s.strip()) > 20][:15]
-#                     answer += "**Key Information:**\n"
-#                     for i, sentence in enumerate(relevant_sentences_from_url, 1):
-#                         answer += f"{i}. {sentence}\n"
-#                     answer += "\n" + "─" * 50 + "\n\n"
-#                 elif 'transaction_conditions' in url_info and url_info['transaction_conditions']:
-#                     conditions = url_info['transaction_conditions']
-#                     for key in ['requirements', 'procedures', 'restrictions', 'timeframes', 'fees']:
-#                         items = conditions.get(key, [])
-#                         if items:
-#                             answer += f"**{key.capitalize()}:**\n"
-#                             for i, item in enumerate(items[:5], 1):
-#                                 answer += f"{i}. {item}\n"
-#                             answer += "\n"
-#                     answer += "─" * 50 + "\n\n"
-#         return answer
-
-#     if not relevant_sentences:
-#         return f"No specific information found about {question.lower()} for {transaction_type}."
-#     answer = f"Here's what I found about {transaction_type}:\n\n"
-#     for i, sentence in enumerate(relevant_sentences[:5], 1):
-#         answer += f"{i}. {sentence.strip()}\n"
-#     return answer
-
-
-
-# def generate_focused_answer(
-#     question: str,
-#     relevant_sentences: List[str],
-#     transaction_type: str,
-#     url_data: List[Dict] = None,
-#     file_content: str = None,
-#     question_focus: List[str] = None,
-#     question_doc = None
-# ) -> str:
-#     def dedup_and_clean(sentences: List[str]) -> List[str]:
-#         seen = set()
-#         cleaned = []
-#         for s in sentences:
-#             s = s.strip()
-#             # Skip table headers/section titles
-#             if re.match(r'^(Summary|Condition Type|Details|Explanation|Requirements?|Procedures?|Restrictions?|Timeframes?|Fees|Section|Contact)\b', s, re.IGNORECASE):
-#                  continue
-#             if len(s.split()) < 4:
-#                 continue
-#             if s and s not in seen:
-#                 cleaned.append(s)
-#                 seen.add(s)
-#         return cleaned
-
-#     # Helper to group sentences by keywords
-#     def group_sentences(sentences: List[str],sbert_model) -> Dict[str, List[str]]:
-#         groups = {"Refundability": [], "Processing": [], "Requirements": [], "Other": []}
-#         for s in sentences:
-#             s_lower = s.lower()
-#             if "refundable" in s_lower or "refund" in s_lower:
-#                 groups["Refundability"].append(s)
-#             elif "process" in s_lower or "processed" in s_lower or "time" in s_lower or "day" in s_lower:
-#                 groups["Processing"].append(s)
-#             elif "require" in s_lower or "condition" in s_lower or "eligible" in s_lower:
-#                 groups["Requirements"].append(s)
-#             else:
-#                 groups["Other"].append(s)
-#         return groups
-
-#     # If file content, use the existing logic
-#     if file_content:
-#         answer = f"📄 **Information from uploaded file about {transaction_type}:**\n\n"
-#         transaction_conditions = web_scraper.extract_transaction_conditions(file_content, transaction_type)
-#         if question_focus is not None and question_doc is not None:
-#             filtered_conditions = {
-#                 key: filter_conditions_by_relevance(val, question_focus, question_doc,sbert_model)
-#                 for key, val in transaction_conditions.items() if isinstance(val, list)
-#             }
-#         else:
-#             filtered_conditions = transaction_conditions
-
-#         for key in ['requirements', 'procedures', 'restrictions', 'timeframes', 'fees']:
-#             items = filtered_conditions.get(key, [])
-#             if items:
-#                 answer += f"**{key.capitalize()}:**\n"
-#                 for i, item in enumerate(items[:5], 1):
-#                     answer += f"{i}. {item}\n"
-#                 answer += "\n"
-#         if relevant_sentences and not any(filtered_conditions.values()):
-#             answer += "**Key Information:**\n"
-#             for i, sentence in enumerate(relevant_sentences[:10], 1):
-#                 answer += f"{i}. {sentence}\n"
-#         return answer
 
 def generate_focused_answer(
     question: str,
@@ -554,7 +316,6 @@ def generate_focused_answer(
                 groups["Other"].append(s)
         return groups
 
-    # If file content, use the existing logic
     if file_content:
         answer = f"📄 **Information from uploaded file about {transaction_type}:**\n\n"
         transaction_conditions = web_scraper.extract_transaction_conditions(file_content, transaction_type)
@@ -579,7 +340,6 @@ def generate_focused_answer(
                 answer += f"{i}. {sentence}\n"
         return answer
 
-    # If web data, use the existing logic
     if url_data and any(d['status'] == 'success' for d in url_data):
         answer = f"📎 **Information from websites about {transaction_type}:**\n\n"
         for url_info in url_data:
@@ -598,7 +358,6 @@ def generate_focused_answer(
                 answer += "─" * 50 + "\n\n"
         return answer
 
-    # For DB or fallback, organize and deduplicate
     if not relevant_sentences:
         return f"No specific information found about {question.lower()} for {transaction_type}."
 
@@ -616,33 +375,7 @@ def generate_focused_answer(
 
 
 
-    # If web data, use the existing logic
-    # if url_data and any(d['status'] == 'success' for d in url_data):
-    #     answer = f"📎 **Information from websites about {transaction_type}:**\n\n"
-    #     for url_info in url_data:
-    #         if url_info['status'] == 'success':
-    #             answer += f"**From: {url_info['title']}**\n"
-    #             answer += f"**URL:** {url_info['url']}\n\n"
-    #             if url_info.get('raw_content'):
-    #                 content = url_info['raw_content']
-    #                 sentences = re.split(r'[.!?]+', content)
-    #                 relevant_sentences_from_url = [s.strip() for s in sentences if len(s.strip()) > 20][:15]
-    #                 relevant_sentences_from_url = dedup_and_clean(relevant_sentences_from_url)
-    #                 answer += "**Key Information:**\n"
-    #                 for i, sentence in enumerate(relevant_sentences_from_url, 1):
-    #                     answer += f"{i}. {sentence}\n"
-    #                 answer += "\n" + "─" * 50 + "\n\n"
-    #             elif 'transaction_conditions' in url_info and url_info['transaction_conditions']:
-    #                 conditions = url_info['transaction_conditions']
-    #                 for key in ['requirements', 'procedures', 'restrictions', 'timeframes', 'fees']:
-    #                     items = conditions.get(key, [])
-    #                     if items:
-    #                         answer += f"**{key.capitalize()}:**\n"
-    #                         for i, item in enumerate(items[:5], 1):
-    #                             answer += f"{i}. {item}\n"
-    #                         answer += "\n"
-    #                 answer += "─" * 50 + "\n\n"
-    #     return answer
+   
     if url_data and any(d['status'] == 'success' for d in url_data):
         answer = f"📎 **Information from websites about {transaction_type}:**\n\n"
     for url_info in url_data:
@@ -661,7 +394,6 @@ def generate_focused_answer(
             answer += "─" * 50 + "\n\n"
     return answer
 
-    # For DB or fallback, organize and deduplicate
     if not relevant_sentences:
         return f"No specific information found about {question.lower()} for {transaction_type}."
 
@@ -686,90 +418,7 @@ def trigger_training():
     train_chatbot(training_folder)
     return jsonify({'message': 'Training completed and conditions saved to MongoDB Atlas.'})
 
-# @main.route('/chat', methods=['POST'])
-# def chat():
-#     question = request.form.get('question', '').strip()
-#     file = request.files.get('file')
-#     if not question and not file:
-#         return jsonify({'answer': 'Please provide a question or upload a file.'}), 400
 
-#     question = clean_text(question) if question else ""
-#     transaction_type, confidence_score = detect_transaction_type(question) if question else (None, 0.0)
-    
-#     if not transaction_type and file:
-#         transaction_type = 'refunds'  # Default for file uploads if no question
-#         confidence_score = 1.0
-#     elif not transaction_type:
-#         return jsonify({'answer': 'Could not identify a transaction type. Please include terms like "refunds", "payments", "transfers", or "exchanges".'}), 400
-
-#     question_focus = extract_question_focus(question) if question else []
-#     question_doc = nlp(question.lower()) if question else nlp("")
-    
-#     file_content = None
-#     file_path = None
-#     if file and allowed_file(file.filename):
-#         filename = secure_filename(file.filename)
-#         file_path = os.path.join(current_app.config.get('UPLOAD_FOLDER', 'uploads'), filename)
-#         os.makedirs(os.path.dirname(file_path), exist_ok=True)
-#         file.save(file_path)
-#         file_content = extract_text(file_path)
-#         os.remove(file_path)  # Clean up after processing
-#         if not file_content:
-#             return jsonify({'answer': f"Failed to extract content from {filename}."}), 400
-
-#     urls_processed = []
-#     if question and web_scraper:
-#         urls = web_scraper.extract_urls_from_text(question)
-#         if urls:
-#             urls_processed = web_scraper.process_urls_in_question(question, transaction_type)
-#             print(f"Processed {len(urls_processed)} URLs: {urls}")
-    
-#     if file_content:
-#         relevant_sentences = []
-#         if question:
-#             sentences = preprocess_text(file_content)
-#             relevant_sentences = filter_relevant_sentences(sentences, question_focus, question_doc)
-#         answer = generate_focused_answer(question, relevant_sentences, transaction_type, file_content=file_content)
-#         return jsonify({
-#             'answer': answer,
-#             'transaction_type': transaction_type,
-#             'confidence': confidence_score,
-#             'sentences_count': len(relevant_sentences),
-#             'source': 'file_upload'
-#         })
-    
-#     if urls_processed and any(url_info['status'] == 'success' for url_info in urls_processed):
-#         relevant_sentences = []
-#         for url_info in urls_processed:
-#             if url_info['status'] == 'success':
-#                 content = url_info.get('raw_content', '')
-#                 if content:
-#                     sentences = re.split(r'[.!?]+', content)
-#                     relevant_sentences.extend([s.strip() for s in sentences if len(s.strip()) > 20])
-#         relevant_sentences = list(set(relevant_sentences))[:10]
-#         answer = generate_focused_answer(question, relevant_sentences, transaction_type, urls_processed)
-#         return jsonify({
-#             'answer': answer,
-#             'transaction_type': transaction_type,
-#             'confidence': confidence_score,
-#             'sentences_count': len(relevant_sentences),
-#             'urls_processed': len(urls_processed),
-#             'source': 'web_scraping'
-#         })
-    
-#     all_sentences = get_conditions_from_db(transaction_type)
-#     relevant_sentences = find_most_similar_sentences(question, all_sentences, nlp, top_k=5)
-#     answer = generate_focused_answer(question, [sentence for sentence, _ in relevant_sentences], transaction_type, urls_processed)
-    
-#     return jsonify({
-#         'answer': answer,
-#         'transaction_type': transaction_type,
-#         'confidence': confidence_score,
-#         'relevant_sentences_count': len(relevant_sentences),
-#         'question_focus': question_focus[:5],
-#         'urls_processed': len(urls_processed),
-#         'source': 'database'
-#     })
 @main.route('/chat', methods=['POST'])
 def chat():
     question = request.form.get('question', '').strip()
